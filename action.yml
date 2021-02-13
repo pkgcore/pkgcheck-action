@@ -1,0 +1,10 @@
+name: 'pkgcheck'
+description: 'Run pkgcheck over an ebuild repository'
+inputs:
+  args:
+    description: 'Arguments to pass to pkgcheck'
+    required: false
+    default: ''
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
