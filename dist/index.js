@@ -67501,21 +67501,26 @@ async function run() {
       await exec.exec('pmaint', ['sync', 'gentoo']);
     });
 
+    const options = {ignoreReturnCode: true}
     await core.group('Update repo metadata', async () => {
       // ignore metadata generation errors that will be reported by pkgcheck
-      const options = {ignoreReturnCode: true}
       await exec.exec('pmaint', ['regen', '--dir', path.join(pkgcheck_cache_dir, 'repos'), '.'], options);
     });
 
     const default_args = ['--color', 'y', 'scan', '--exit'];
     const scan_args = core.getInput('args').split(' ');
-    await core.group('Run pkgcheck scan', async () => {
-      await exec.exec('pkgcheck', [...default_args, ...scan_args]);
+    const exit_status = await core.group('Run pkgcheck scan', async () => {
+      // handle pkgcheck exit status manually so cache can still be saved on failure
+      return await exec.exec('pkgcheck', [...default_args, ...scan_args], options);
     });
 
     await core.group('Save cache', async () => {
       const cacheId = await cache.saveCache(cache_paths, key);
     });
+
+    if (exit_status) {
+      core.setFailed(`pkgcheck failed with exit code ${exit_status}`);
+    }
   } catch (error) {
     core.setFailed(error.message);
   }
