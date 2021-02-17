@@ -42,7 +42,9 @@ async function run() {
     });
 
     await core.group('Update repo metadata', async () => {
-      await exec.exec('pmaint', ['regen', '--dir', path.join(pkgcheck_cache_dir, 'repos'), '.']);
+      // ignore metadata generation errors that will be reported by pkgcheck
+      const options = {ignoreReturnCode: true}
+      await exec.exec('pmaint', ['regen', '--dir', path.join(pkgcheck_cache_dir, 'repos'), '.'], options);
     });
 
     const default_args = ['--color', 'y', 'scan', '--exit'];
