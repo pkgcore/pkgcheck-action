@@ -34,7 +34,6 @@ async function run() {
 
     await core.group('Install pkgcheck', async () => {
       await exec.exec('pip', ['install', '--upgrade', 'pip']);
-      await exec.exec('pip', ['install', 'https://github.com/pkgcore/pkgcore/archive/master.tar.gz']);
       await exec.exec('pip', ['install', 'pkgcheck']);
     });
 
