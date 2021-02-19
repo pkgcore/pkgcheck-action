@@ -14,7 +14,7 @@
   },
   "keywords": [],
   "author": "Tim Harder <radhermit@gmail.com>",
-  "license": "BSD-3",
+  "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/pkgcore/pkgcheck-action/issues"
   },
