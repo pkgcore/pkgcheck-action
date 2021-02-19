@@ -26,6 +26,7 @@ async function run() {
       const cache_key = await cache.restoreCache(cache_paths, key, restoreKeys);
     });
 
+    // use vendored setup-python action
     // https://github.com/actions/setup-python/issues/38
     await core.group('Set up python', async () => {
       const installed = await setupPython.findPythonVersion('3.x', 'x64');
@@ -34,14 +35,15 @@ async function run() {
 
     await core.group('Install pkgcheck', async () => {
       await exec.exec('pip', ['install', '--upgrade', 'pip']);
-      await exec.exec('pip', ['install', 'pkgcheck']);
+      const pkgs = core.getInput('pkgs').split(' ');
+      await exec.exec('pip', ['install', ...pkgs]);
     });
 
     await core.group('Sync gentoo repo', async () => {
       await exec.exec('pmaint', ['sync', 'gentoo']);
     });
 
-    const options = {ignoreReturnCode: true}
+    const options = {ignoreReturnCode: true};
     await core.group('Update repo metadata', async () => {
       // ignore metadata generation errors that will be reported by pkgcheck
       await exec.exec('pmaint', ['regen', '--dir', path.join(pkgcheck_cache_dir, 'repos'), '.'], options);

@@ -5,6 +5,10 @@ inputs:
     description: 'Arguments to pass to pkgcheck'
     required: false
     default: ''
+  pkgs:
+    description: 'Target pkgcheck package to install via pip'
+    required: false
+    default: 'pkgcheck'
 runs:
   using: 'node12'
   main: 'dist/index.js'

@@ -4,9 +4,9 @@ This action runs pkgcheck over an ebuild repository.
 
 ## Inputs
 
-### `args`
+### `args` (optional)
 
-**Optional** arguments to pass to pkgcheck.
+Custom arguments to pass to pkgcheck.
 
 By default, pkgcheck is run via:
 
@@ -27,6 +27,31 @@ Causes pkgcheck to be run as follows:
 
 ```
 pkgcheck scan --color y scan --exit --keywords=-RedundantVersion
+```
+
+### `pkgs` (optional)
+
+Target pkgcheck package to install via pip. Multiple packages can also be
+specified as a space-separated list if required.
+
+By default, the latest pkgcheck release on pypi is installed. This option makes
+pip install a custom set of packages.
+
+Use of this option targets those who want to pin to a specific release for
+whatever reason (e.g. bugs in newer versions) via a workflow similar to:
+
+```yaml
+uses: pkgcore/pkgcheck-action@v1
+with:
+  pkgs: pkgcheck==0.8.2
+```
+
+or those that want to live on the edge running pkgcheck from git:
+
+```yaml
+uses: pkgcore/pkgcheck-action@v1
+with:
+  pkgs: https://github.com/pkgcore/pkgcheck/archive/master.tar.gz
 ```
 
 ## Example workflows
