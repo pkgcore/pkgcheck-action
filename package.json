@@ -13,8 +13,8 @@
     "url": "git+https://github.com/pkgcore/pkgcheck-action.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Tim Harder <radhermit@gmail.com>",
+  "license": "BSD-3",
   "bugs": {
     "url": "https://github.com/pkgcore/pkgcheck-action/issues"
   },
