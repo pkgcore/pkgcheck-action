@@ -20,7 +20,8 @@ async function run() {
       pkgcore_cache_dir
     ];
     // use cache key unique to each run to force cache saves
-    const key = `pkgcheck-${github.context.runId}-${github.context.runNumber}`;
+    const timestamp = Date.now();
+    const key = `pkgcheck-${github.context.runId}-${timestamp}`;
     const restoreKeys = [`pkgcheck-${github.context.runId}-`, 'pkgcheck-'];
     await core.group('Restore cache', async () => {
       const cache_key = await cache.restoreCache(cache_paths, key, restoreKeys);
