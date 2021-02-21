@@ -10,12 +10,12 @@ const setupPython = require('setup-python/lib/find-python')
 async function run() {
   try {
     // JSON webhook payload for event triggering workflow
-    const payload = JSON.stringify(github.context.payload, undefined, 2)
+    const payload = JSON.stringify(github.context.payload, undefined, 2);
 
-    const pkgcheck_cache_dir = path.join(os.homedir(), '.cache/pkgcheck')
-    const pkgcore_cache_dir = path.join(os.homedir(), '.cache/pkgcore')
+    const pkgcheck_cache_dir = path.join(os.homedir(), '.cache', 'pkgcheck');
+    const pkgcore_cache_dir = path.join(os.homedir(), '.cache', 'pkgcore');
     const cache_paths = [
-      path.join(os.homedir(), '.cache/pip'),
+      path.join(os.homedir(), '.cache', 'pip'),
       pkgcheck_cache_dir,
       pkgcore_cache_dir
     ];
@@ -50,9 +50,10 @@ async function run() {
       await exec.exec('pmaint', ['regen', '--dir', path.join(pkgcheck_cache_dir, 'repos'), '.'], options);
     });
 
-    const default_args = ['--color', 'y', 'scan', '--exit'];
+    const failures = path.join(os.homedir(), 'failures.json');
+    const default_args = ['--color', 'y', 'ci', '--failures', failures, '--exit'];
     const scan_args = core.getInput('args').split(' ');
-    const exit_status = await core.group('Run pkgcheck scan', async () => {
+    const exit_status = await core.group('Run pkgcheck', async () => {
       // handle pkgcheck exit status manually so cache can still be saved on failure
       return await exec.exec('pkgcheck', [...default_args, ...scan_args], options);
     });
@@ -62,6 +63,8 @@ async function run() {
     });
 
     if (exit_status) {
+      core.info('\n\u001b[1m\u001b[38;2;255;0;0mFAILURE RESULTS')
+      await exec.exec('pkgcheck', ['replay', '--color', 'y', failures]);
       core.setFailed(`pkgcheck failed with exit code ${exit_status}`);
     }
   } catch (error) {
