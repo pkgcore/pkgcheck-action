@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "ncc build src/index.js -o dist --source-map --license licenses.txt",
+    "prepare": "ncc build src/index.js -o dist",
     "build-setup-python": "npm install --prefix node_modules/setup-python && npm run build --prefix node_modules/setup-python"
   },
   "repository": {

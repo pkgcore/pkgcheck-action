@@ -1,4 +1,4 @@
-require('./sourcemap-register.js');module.exports =
+module.exports =
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -63681,4 +63681,3 @@ module.exports = require("zlib");;
 /******/ 	return __nccwpck_require__(8677);
 /******/ })()
 ;
-//# sourceMappingURL=index.js.map
