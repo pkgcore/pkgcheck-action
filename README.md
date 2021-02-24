@@ -54,6 +54,22 @@ with:
   pkgs: https://github.com/pkgcore/pkgcheck/archive/master.tar.gz
 ```
 
+## Action failures
+
+By default, failures occur when any error level results are found. If any occur
+they will be displayed again separately from the main pkgcheck output in order
+to highlight the cause of the failure.
+
+While it is best to use the default failure settings, they can be changed using
+custom arguments to the ``--exit`` option. For example, the following config
+setting forces only NonsolvableDeps results to return failures:
+
+```yaml
+uses: pkgcore/pkgcheck-action@v1
+with:
+  args: NonsolvableDeps
+```
+
 ## Example workflows
 
 Workflow with no custom arguments:
