@@ -43,7 +43,7 @@ whatever reason (e.g. bugs in newer versions) via a workflow similar to:
 ```yaml
 uses: pkgcore/pkgcheck-action@v1
 with:
-  pkgs: pkgcheck==0.8.2
+  pkgs: pkgcheck==0.9.0
 ```
 
 or those that want to live on the edge running pkgcheck from git:
