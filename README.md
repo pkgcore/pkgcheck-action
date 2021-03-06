@@ -28,7 +28,7 @@ whatever reason (e.g. bugs in newer versions) via:
 ```yaml
 uses: pkgcore/pkgcheck-action@v1
 with:
-  pkgs: pkgcheck==0.9.0
+  pkgs: pkgcheck==0.9.2
 ```
 
 or those that want to live on the edge running pkgcheck from git:
@@ -41,19 +41,9 @@ with:
 
 ## Action failures
 
-By default, failures occur when any error level results are found. If any occur
-they will be displayed again separately from the main pkgcheck output in order
-to highlight the cause of the failure.
-
-While it is best to use the default failure settings, they can be changed using
-custom arguments to the ``--exit`` option. For example, the following config
-setting forces only NonsolvableDeps results to return failures:
-
-```yaml
-uses: pkgcore/pkgcheck-action@v1
-with:
-  args: NonsolvableDeps
-```
+Failures occur when error level results are found that match Gentoo CI
+settings. If any occur they will be displayed again separately from the main
+pkgcheck output in order to highlight the cause of the failure.
 
 ## Example workflows
 

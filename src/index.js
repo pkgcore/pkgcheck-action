@@ -51,7 +51,7 @@ async function run() {
     });
 
     const failures = path.join(os.homedir(), 'failures.json');
-    const default_args = ['--color', 'y', 'ci', '--failures', failures, '--exit'];
+    const default_args = ['--color', 'y', 'ci', '--failures', failures, '--exit', 'GentooCI'];
     const scan_args = core.getInput('args').split(' ');
     const exit_status = await core.group('Run pkgcheck', async () => {
       // handle pkgcheck exit status manually so cache can still be saved on failure
