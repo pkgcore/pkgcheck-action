@@ -8,7 +8,7 @@ inputs:
   pkgs:
     description: Target packages to install via pip
     required: false
-    default: pkgcore>=0.11.8 pkgcheck>=0.9.6
+    default: pkgcore>=0.11.8 pkgcheck>=0.9.7
 runs:
   using: node12
   main: dist/index.js
