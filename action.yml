@@ -6,9 +6,9 @@ inputs:
     required: false
     default: ''
   pkgs:
-    description: Target pkgcheck package to install via pip
+    description: Target packages to install via pip
     required: false
-    default: pkgcore==0.11.6 pkgcheck>=0.9.6
+    default: pkgcore>=0.11.8 pkgcheck>=0.9.6
 runs:
   using: node12
   main: dist/index.js
