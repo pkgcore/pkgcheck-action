@@ -65936,7 +65936,7 @@ async function run() {
     // use vendored setup-python action
     // https://github.com/actions/setup-python/issues/38
     await core.group('Set up python', async () => {
-      const installed = await setupPython.findPythonVersion('3.x', 'x64');
+      const installed = await setupPython.findPythonVersion('3.11', 'x64');
       core.info(`Successfully set up ${installed.impl}-${installed.version}`);
     });
 
