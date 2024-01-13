@@ -5,10 +5,6 @@ inputs:
     description: Arguments to pass to pkgcheck
     required: false
     default: ''
-  pkgs:
-    description: Target packages to install via pip
-    required: false
-    default: pkgcheck>=0.10.3
 runs:
   using: composite
   steps:
