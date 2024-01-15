@@ -16,27 +16,12 @@ with:
   args: --keywords=-RedundantVersion
 ```
 
-### `pkgs` (optional) -- target package to install
-
-By default, the latest pkgcheck release is installed. This option allows
-installing a custom set of packages. Multiple packages can be specified as a
-space-separated list if required.
-
-Use of this option targets those who want to pin to a specific release for
-whatever reason (e.g. bugs in newer versions) via:
+To enable network checks, you can add ``--net`` to ``args``:
 
 ```yaml
 uses: pkgcore/pkgcheck-action@v1
 with:
-  pkgs: pkgcheck==0.9.2
-```
-
-or those that want to live on the edge running pkgcheck from git:
-
-```yaml
-uses: pkgcore/pkgcheck-action@v1
-with:
-  pkgs: https://github.com/pkgcore/pkgcheck/archive/master.tar.gz
+  args: --net
 ```
 
 ## Action failures
@@ -63,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Run pkgcheck
       uses: pkgcore/pkgcheck-action@v1
@@ -85,7 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Run pkgcheck
       uses: pkgcore/pkgcheck-action@v1
