@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout pkgcheck-action
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         path: pkgcheck-action
 
     - name: Checkout GURU repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: gentoo/guru
         path: guru
