@@ -34,5 +34,6 @@ runs:
           runner \"Run pkgcheck\" pkgcheck --color y ci --failures ~/failures.json --exit GentooCI ${{ inputs.args }} ;
           scan_exit_status=$? ;
           pkgcheck replay --color y ~/failures.json ;
+          pkgcheck replay -R GithubReporter ~/failures.json | sed -E -e 's#^(::[a-z]+ file=)#\1${{ inputs.path }}/#' -e 's#^(::[a-z]+ file=)(\./|/)+#\1#' ;
           exit $scan_exit_status
           "

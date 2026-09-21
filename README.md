@@ -40,7 +40,8 @@ with:
 
 Failures occur when error level results are found that match Gentoo CI
 settings. If any occur they will be displayed again separately from the main
-pkgcheck output in order to highlight the cause of the failure.
+pkgcheck output in order to highlight the cause of the failure, and emitted as
+workflow annotations so they also show up inline on the pull request diff.
 
 ## Example workflows
 
