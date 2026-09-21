@@ -4,6 +4,18 @@ This action runs pkgcheck over an ebuild repository.
 
 ## Inputs
 
+### `path` (optional) -- the repository to check
+
+Defaults to the workspace root, which is where `actions/checkout` puts the
+repository unless told otherwise. Set it when the repository is checked out
+into a subdirectory:
+
+```yaml
+uses: pkgcore/pkgcheck-action@v1
+with:
+  path: my-overlay
+```
+
 ### `args` (optional) -- custom arguments for pkgcheck
 
 Custom arguments can be any arguments used with ``pkgcheck scan`` when running

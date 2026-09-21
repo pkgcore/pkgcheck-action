@@ -24,4 +24,5 @@ jobs:
     - name: Run pkgcheck
       uses: ./pkgcheck-action/
       with:
-        args: --keywords=-RedundantVersion,-NonsolvableDepsInDev guru
+        path: guru
+        args: --keywords=-RedundantVersion,-NonsolvableDepsInDev

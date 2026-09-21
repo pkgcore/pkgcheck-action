@@ -1,6 +1,10 @@
 name: pkgcheck
 description: Run pkgcheck over an ebuild repository
 inputs:
+  path:
+    description: Path to the ebuild repository to check
+    required: false
+    default: '.'
   args:
     description: Arguments to pass to pkgcheck
     required: false
@@ -23,7 +27,8 @@ runs:
         args: >
           -c "
           runner() { echo \"::group::${1}\"; shift 1; \"$@\"; local exit=$?; echo; echo \"::endgroup::\"; return $exit; } ;
-          runner \"Sync gentoo repo\" pmaint sync gentoo || exit 1 ;
+          cd '${{ inputs.path }}' || exit 1 ;
+          runner \"Sync parent repos\" pmaint sync --import-masters . || exit 1 ;
           runner \"Update repo metadata\" pmaint regen --dir ~/.cache/pkgcheck/repos . ;
           runner \"Marking workspace safe for git\" git config --global --add safe.directory '*' ;
           runner \"Run pkgcheck\" pkgcheck --color y ci --failures ~/failures.json --exit GentooCI ${{ inputs.args }} ;
